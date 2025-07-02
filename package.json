@@ -1,0 +1,34 @@
+{
+  "name": "@chorenzo/recipes-core",
+  "version": "0.1.0",
+  "description": "Core recipes for the Chorenzo engine - atomic, composable automation recipes",
+  "keywords": [
+    "chorenzo",
+    "recipes",
+    "automation",
+    "devtools",
+    "ai",
+    "workflow",
+    "engineering-automation",
+    "developer-experience",
+    "claude-ai",
+    "cicd",
+    "eslint",
+    "typescript",
+    "github-actions"
+  ],
+  "author": "Chorenzo Team",
+  "license": "Apache-2.0",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/chorenzo/recipes-core.git"
+  },
+  "files": [
+    "code_quality/",
+    "platform/",
+    "*.md"
+  ],
+  "engines": {
+    "node": ">=14.0.0"
+  }
+}
