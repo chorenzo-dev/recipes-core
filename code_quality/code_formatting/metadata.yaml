@@ -1,0 +1,25 @@
+id: code_formatting
+category: code_quality
+summary: Ensure a formatter exists & is applied consistently.
+
+ecosystems:
+  - id: javascript
+    default_variant: prettier
+    variants:
+      - id: prettier
+        fix_prompt: fixes/javascript_prettier.md
+
+  - id: python
+    default_variant: black
+    variants:
+      - id: black
+        fix_prompt: fixes/python_black.md
+      - id: ruff
+        fix_prompt: fixes/python_ruff.md
+
+provides:
+  - code_formatting.exists
+  - code_formatting.applied
+  - code_formatting.variant
+
+requires: []
