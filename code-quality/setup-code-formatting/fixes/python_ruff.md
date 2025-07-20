@@ -2,10 +2,18 @@
 
 ## Installation
 
-Install Ruff as a development dependency using the project's package manager (pip, poetry, pipenv, uv, etc.):
+Check if Ruff is already installed:
+
+```bash
+ruff --version
+# or check in project dependencies:
+pip list | grep ruff
+```
+
+If not found, install Ruff as a development dependency using the project's package manager:
 
 - Ensure installation occurs in the project's virtual environment if one exists
-- Add Ruff as a development/dev-group dependency
+- Add Ruff as a development/dev-group dependency (pip, poetry, pipenv, uv, etc.)
 
 ## Configuration
 
@@ -57,14 +65,12 @@ format-check:
 
 ## Verification
 
-Run the formatter:
-
-```bash
-ruff format .
-```
-
 Check formatting without making changes:
 
 ```bash
 ruff format --check .
 ```
+
+This command will:
+- Exit with code 0 if all files are properly formatted
+- Exit with code 1 and show which files need formatting if changes are required

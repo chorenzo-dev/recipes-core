@@ -2,7 +2,13 @@
 
 ## Installation
 
-Install Prettier as a development dependency:
+Check if Prettier is already installed:
+
+```bash
+npm list prettier
+```
+
+If not found, install Prettier as a development dependency:
 
 ```bash
 npm install --save-dev prettier
@@ -51,14 +57,12 @@ Add formatting scripts to `package.json`:
 
 ## Verification
 
-Run the formatter to verify it's working:
-
-```bash
-npm run format
-```
-
-Check if all files are formatted correctly:
+Check if all files are formatted correctly (without modifying them):
 
 ```bash
 npm run format:check
 ```
+
+This command will:
+- Exit with code 0 if all files are properly formatted
+- Exit with code 1 and list unformatted files if formatting is needed
