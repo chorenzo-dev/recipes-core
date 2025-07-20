@@ -1,5 +1,5 @@
-id: code_formatting
-category: code_quality
+id: code-formatting
+category: code-quality
 summary: Ensure a formatter exists & is applied consistently.
 
 ecosystems:
@@ -18,8 +18,8 @@ ecosystems:
         fix_prompt: fixes/python_ruff.md
 
 provides:
-  - code_formatting.exists
-  - code_formatting.applied
-  - code_formatting.variant
+  - code-formatting.exists
+  - code-formatting.applied
+  - code-formatting.variant
 
 requires: []

@@ -14,6 +14,6 @@ Ensure consistent code formatting across the codebase with an automated formatte
    - Identify which languages have formatters configured
 
 ## Expected Output
-- code_formatting.exists: Whether any code formatter is configured for the project
-- code_formatting.applied: Whether formatting appears to be consistently enforced
-- code_formatting.variant: The specific formatter tool detected (if any)
+- code-formatting.exists: Whether any code formatter is configured for the project
+- code-formatting.applied: Whether formatting appears to be consistently enforced
+- code-formatting.variant: The specific formatter tool detected (if any)

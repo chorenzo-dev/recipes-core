@@ -95,7 +95,7 @@ How to verify the tool is working correctly.
 
 ## Example Recipe
 
-See `code_quality/code_formatting/` for a complete example implementing code formatter detection and setup.
+See `code-quality/code-formatting/` for a complete example implementing code formatter detection and setup.
 
 ## Contributing
 
