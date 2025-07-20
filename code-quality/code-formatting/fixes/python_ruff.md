@@ -65,12 +65,14 @@ format-check:
 
 ## Verification
 
-Check formatting without making changes:
+Apply formatting to all files:
+
+```bash
+ruff format .
+```
+
+Then verify all files are properly formatted:
 
 ```bash
 ruff format --check .
 ```
-
-This command will:
-- Exit with code 0 if all files are properly formatted
-- Exit with code 1 and show which files need formatting if changes are required

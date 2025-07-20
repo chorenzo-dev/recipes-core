@@ -1,6 +1,6 @@
-id: setup-code-formatting
+id: code-formatting
 category: code-quality
-summary: Set up code formatting tools and verify configuration.
+summary: Ensure a formatter exists & is applied consistently.
 
 ecosystems:
   - id: javascript
@@ -18,8 +18,8 @@ ecosystems:
         fix_prompt: fixes/python_ruff.md
 
 provides:
-  - setup-code-formatting.installed
-  - setup-code-formatting.configured
-  - setup-code-formatting.variant
+  - code-formatting.exists
+  - code-formatting.applied
+  - code-formatting.variant
 
 requires: []

@@ -1,5 +1,5 @@
 ## Goal
-Set up and configure code formatting tools for the project.
+Ensure consistent code formatting across the codebase with an automated formatter.
 
 ## Investigation
 1. **Detect existing formatters**
@@ -14,6 +14,6 @@ Set up and configure code formatting tools for the project.
    - Identify which languages have formatters configured
 
 ## Expected Output
-- setup-code-formatting.installed: Whether formatter tools are installed and available
-- setup-code-formatting.configured: Whether formatter configuration files are properly set up
-- setup-code-formatting.variant: The specific formatter tool configured (if any)
+- code-formatting.exists: Whether any code formatter is configured for the project
+- code-formatting.applied: Whether formatting appears to be consistently enforced
+- code-formatting.variant: The specific formatter tool detected (if any)

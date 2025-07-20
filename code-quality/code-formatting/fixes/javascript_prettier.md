@@ -57,12 +57,14 @@ Add formatting scripts to `package.json`:
 
 ## Verification
 
-Check if all files are formatted correctly (without modifying them):
+Apply formatting to all files:
+
+```bash
+npm run format
+```
+
+Then verify all files are properly formatted:
 
 ```bash
 npm run format:check
 ```
-
-This command will:
-- Exit with code 0 if all files are properly formatted
-- Exit with code 1 and list unformatted files if formatting is needed

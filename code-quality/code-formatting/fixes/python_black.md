@@ -65,12 +65,14 @@ format-check:
 
 ## Verification
 
-Check if all files are formatted correctly (without modifying them):
+Apply formatting to all files:
+
+```bash
+black .
+```
+
+Then verify all files are properly formatted:
 
 ```bash
 black --check .
 ```
-
-This command will:
-- Exit with code 0 if all files are properly formatted
-- Exit with code 1 and show which files need formatting if changes are required
