@@ -1,0 +1,25 @@
+id: code-linting
+category: code-quality
+summary: Ensure a linter exists & is applied consistently to catch code quality issues.
+
+ecosystems:
+  - id: javascript
+    default_variant: eslint
+    variants:
+      - id: eslint
+        fix_prompt: fixes/javascript_eslint.md
+
+  - id: python
+    default_variant: ruff
+    variants:
+      - id: ruff
+        fix_prompt: fixes/python_ruff.md
+      - id: pylint
+        fix_prompt: fixes/python_pylint.md
+
+provides:
+  - code-linting.exists
+  - code-linting.applied
+  - code-linting.variant
+
+requires: []
