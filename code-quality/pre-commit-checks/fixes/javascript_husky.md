@@ -35,26 +35,33 @@ This creates `.husky/` directory and adds a prepare script to `package.json`.
 
 ## lint-staged Configuration
 
-Add lint-staged configuration to `package.json` based on available scripts. Only include commands that exist in the project's scripts.
+Create a separate `.lintstagedrc.json` file for cleaner configuration management:
+
+```bash
+touch .lintstagedrc.json
+```
+
+Add lint-staged configuration based on available scripts. Only include commands that exist in the project's scripts.
 
 Example configuration structure:
 ```json
 {
-  "lint-staged": {
-    "*.{js,jsx,ts,tsx}": [
-      // Add commands based on available scripts
-    ],
-    "*.{json,md,yml,yaml}": [
-      // Add formatting commands if available
-    ]
-  }
+  "*.{js,jsx,ts,tsx}": [
+    // Add commands based on available scripts in this order:
+    // 1. Type checking first (catches compilation errors early)
+    // 2. Linting second (no point linting code that doesn't compile)
+    // 3. Formatting last (cosmetic changes)
+  ],
+  "*.{json,md,yml,yaml}": [
+    // Add formatting commands if available
+  ]
 }
 ```
 
-Configure based on which scripts are available:
-- For type checking: Add `"npm run typecheck"` if `typecheck`, `type-check`, `tsc`, or `check-types` script exists
-- For linting: Add `"npm run lint:fix"` if available, otherwise `"npm run lint"` or `"npm run eslint"`
-- For formatting: Add `"npm run format"` if available, otherwise `"npm run prettier"` if available
+Configure based on which scripts are available, in this recommended order:
+1. **Type checking first**: Add `"npm run typecheck"` if `typecheck`, `type-check`, `tsc`, or `check-types` script exists
+2. **Linting second**: Add `"npm run lint:fix"` if available, otherwise `"npm run lint"` or `"npm run eslint"`
+3. **Formatting last**: Add `"npm run format"` if available, otherwise `"npm run prettier"` if available
 - Only include file patterns that have corresponding available commands
 
 ## Pre-commit Hook
@@ -68,14 +75,9 @@ chmod +x .husky/pre-commit
 
 ## Verification
 
-Test the setup by staging some files and attempting a commit:
+The setup is now complete. The pre-commit hooks will run automatically on your next commit.
 
-```bash
-git add .
-git commit -m "test pre-commit hooks"
-```
-
-The hooks should run automatically and either pass or prevent the commit if issues are found.
+The hooks will run automatically and either pass or prevent the commit if issues are found.
 
 ## Troubleshooting
 
