@@ -20,61 +20,28 @@ For TypeScript projects, also install:
 npm install --save-dev @typescript-eslint/parser @typescript-eslint/eslint-plugin
 ```
 
+For modern ESLint flat config (ESLint 9+), also install:
+
+```bash
+npm install --save-dev @eslint/js globals
+```
+
 ## Configuration
 
-Create an `.eslintrc.js` file in the project root:
+Create an `eslint.config.mjs` file in the project root using the modern flat config format.
 
-```javascript
-module.exports = {
-  extends: ['eslint:recommended'],
-  env: {
-    node: true,
-    es2022: true
-  },
-  parserOptions: {
-    ecmaVersion: 'latest',
-    sourceType: 'module'
-  }
-};
-```
+**Configuration guidelines:**
 
-For TypeScript projects, use:
+- **Extend recommended configurations**: Use `@eslint/js` recommended config as the base
+- **For TypeScript projects**: Also extend `@typescript-eslint/recommended` configuration
+- **File targeting**:
+  - Apply TypeScript rules to `**/*.ts` and `**/*.tsx` files
+  - Apply JavaScript rules to `**/*.js` and `**/*.cjs` files
+- **Common ignore patterns**: Include `dist/**`, `build/**`, `node_modules/**`, and `**/*.generated.*` in the ignores array
+- **Language options**: Set `ecmaVersion: 'latest'` and appropriate `sourceType` (module/commonjs)
+- **Globals**: Include Node.js and ES2022 globals as needed
 
-```javascript
-module.exports = {
-  extends: [
-    'eslint:recommended',
-    '@typescript-eslint/recommended'
-  ],
-  parser: '@typescript-eslint/parser',
-  plugins: ['@typescript-eslint'],
-  env: {
-    node: true,
-    es2022: true
-  },
-  parserOptions: {
-    ecmaVersion: 'latest',
-    sourceType: 'module'
-  }
-};
-```
-
-ESLint automatically ignores files in `.gitignore`, `node_modules`, and version control directories.
-
-Only create a `.eslintignore` file if there are files that aren't already gitignored but shouldn't be linted:
-
-```
-# Examples of files to exclude that might not be in .gitignore:
-# - Generated files not in gitignore
-*.generated.*
-
-# - Files with legacy code that cannot be linted
-legacy/
-
-# - Build output that might not be in gitignore
-dist/
-build/
-```
+**Note**: ESLint automatically ignores `node_modules/` and `.git/` directories. Additional ignore patterns are specified in the `ignores` array within the configuration file. The `.eslintignore` file is deprecated in ESLint 9+ flat config.
 
 ## Scripts
 

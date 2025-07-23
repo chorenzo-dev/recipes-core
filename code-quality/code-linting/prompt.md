@@ -10,10 +10,33 @@ Ensure consistent code linting across the codebase with an automated linter to c
 
 2. **Verify linter presence**
    - If configuration files exist, check if the corresponding linter tool is actually installed
-   - Look for any linter-specific ignore files (.eslintignore, .pylintrc, etc.)
+   - Look for linter-specific ignore files (SpotBugs filter files, .rubocop.yml exclude patterns)
    - Identify which languages have linters configured
 
 ## Expected Output
 - code-linting.exists: Whether any code linter is configured for the project
-- code-linting.applied: Whether linting appears to be consistently enforced
+- code-linting.applied: Whether linting passes with zero errors and warnings using recommended configuration
 - code-linting.variant: The specific linter tool detected (if any)
+
+## Important: Configuration Standards
+When setting up or configuring linters:
+- ALWAYS use ONLY the recommended/standard rule sets (e.g., eslint:recommended, @typescript-eslint/recommended)
+- NEVER add custom rules beyond the recommended configuration
+- NEVER disable or weaken linting rules to make existing code pass
+- NEVER add file-specific rule overrides (e.g., turning off rules for test files)
+- Use the exact configuration shown in the fix templates without modifications
+
+## Verification Requirements
+**CRITICAL**: The `code-linting.applied` status MUST be determined by actually executing the linter:
+
+1. **Complete ALL configuration changes first** - Do not run the linter after each individual change
+2. **MUST execute the linter command ONLY ONCE after all changes are complete** (e.g., `npm run lint`, `ruff check .`, `pylint .`)
+3. **Check the exit status**: Only continue if the command exits with status 0
+4. **Check the output**: Only continue if there are zero errors and zero warnings
+5. **Set status accordingly**:
+   - `code-linting.applied: true` ONLY if linter passes with zero errors/warnings
+   - `code-linting.applied: false` if linter produces ANY errors or warnings
+
+**IMPORTANT**: Do NOT run the linter multiple times during setup. Complete all installation, configuration, and file changes first, then run the linter ONCE at the end for verification.
+
+**Do NOT assume linting is applied just because configuration files exist or tools are installed.**
