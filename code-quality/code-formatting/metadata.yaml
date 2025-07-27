@@ -1,6 +1,7 @@
 id: code-formatting
 category: code-quality
 summary: Ensure a formatter exists & is applied consistently.
+level: workspace-preferred
 
 ecosystems:
   - id: javascript

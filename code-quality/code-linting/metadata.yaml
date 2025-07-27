@@ -1,6 +1,7 @@
 id: code-linting
 category: code-quality
 summary: Ensure a linter exists & is applied consistently to catch code quality issues.
+level: workspace-preferred
 
 ecosystems:
   - id: javascript

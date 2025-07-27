@@ -1,6 +1,7 @@
 id: pre-commit-checks
 category: code-quality
 summary: Automatically run quality checks before each commit to maintain code standards.
+level: workspace-only
 
 ecosystems:
   - id: javascript
