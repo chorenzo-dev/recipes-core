@@ -1,0 +1,24 @@
+id: code-formatting-sort-imports
+category: code-quality
+summary: Sort imports when running the code formatter
+level: workspace-preferred
+
+ecosystems:
+  - id: javascript
+    default_variant: prettier-plugin-sort-imports
+    variants:
+      - id: prettier-plugin-sort-imports
+        fix_prompt: fixes/javascript_prettier-plugin-sort-imports.md
+  - id: python
+    default_variant: isort
+    variants:
+      - id: isort
+        fix_prompt: fixes/python_isort.md
+
+provides:
+  - code-formatting-sort-imports.exists
+  - code-formatting-sort-imports.variant
+
+requires:
+  - key: code-formatting.exists
+    equals: true
