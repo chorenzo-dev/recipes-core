@@ -1,0 +1,35 @@
+id: ci-build-checks
+category: ci-cd
+summary: Set up automated build checks in CI/CD pipeline to verify code quality and compilation.
+level: workspace-preferred
+
+ecosystems:
+  - id: javascript
+    default_variant: github-actions
+    variants:
+      - id: github-actions
+        fix_prompt: fixes/javascript_github_actions.md
+      - id: gitlab-ci
+        fix_prompt: fixes/javascript_gitlab_ci.md
+      - id: circle-ci
+        fix_prompt: fixes/javascript_circle_ci.md
+  - id: python
+    default_variant: github-actions
+    variants:
+      - id: github-actions
+        fix_prompt: fixes/python_github_actions.md
+      - id: gitlab-ci
+        fix_prompt: fixes/python_gitlab_ci.md
+      - id: circle-ci
+        fix_prompt: fixes/python_circle_ci.md
+
+provides:
+  - ci-build-checks.configured
+  - ci-build-checks.platform
+  - ci-build-checks.checks_enabled
+
+requires:
+  - key: code-formatting.applied
+    equals: true
+  - key: code-linting.applied
+    equals: true
