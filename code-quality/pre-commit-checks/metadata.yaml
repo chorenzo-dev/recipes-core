@@ -17,7 +17,6 @@ ecosystems:
         fix_prompt: fixes/python_pre_commit.md
 
 provides:
-  - pre-commit-checks.checks_found
   - pre-commit-checks.hooks_configured
 
 requires: []

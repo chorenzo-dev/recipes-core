@@ -21,6 +21,4 @@ Configure automatic import sorting as part of the code formatting workflow.
 
 ## Expected Output
 
-- code-formatting-sort-imports.exists: Whether import sorting is currently configured (boolean)
-- code-formatting-sort-imports.configured: Whether import sorting has been properly set up with the formatter (boolean)
-- code-formatting-sort-imports.variant: The import sorting approach being used (string)
+This recipe does not provide any state variables as import sorting configuration is too specific for cross-recipe dependencies.

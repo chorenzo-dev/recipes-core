@@ -20,7 +20,6 @@ ecosystems:
 
 provides:
   - code-formatting.exists
-  - code-formatting.applied
   - code-formatting.variant
 
 requires: []

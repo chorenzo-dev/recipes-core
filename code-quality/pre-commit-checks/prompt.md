@@ -18,5 +18,4 @@ Set up automated pre-commit hooks to run type checking, code formatting, and cod
    - Identify if any quality checks are already automated
 
 ## Expected Output
-- pre-commit-checks.checks_found: Whether any type checking, formatting, or linting commands were found in the project
 - pre-commit-checks.hooks_configured: Whether pre-commit hooks are already set up

@@ -15,5 +15,4 @@ Ensure consistent code formatting across the codebase with an automated formatte
 
 ## Expected Output
 - code-formatting.exists: Whether any code formatter is configured for the project
-- code-formatting.applied: Whether formatting appears to be consistently enforced
 - code-formatting.variant: The specific formatter tool detected (if any)
