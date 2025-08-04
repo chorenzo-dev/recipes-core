@@ -15,9 +15,7 @@ ecosystems:
       - id: isort
         fix_prompt: fixes/python_isort.md
 
-provides:
-  - code-formatting-sort-imports.exists
-  - code-formatting-sort-imports.variant
+provides: []
 
 requires:
   - key: code-formatting.exists
