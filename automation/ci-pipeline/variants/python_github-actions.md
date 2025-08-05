@@ -1,0 +1,28 @@
+## Python + GitHub Actions Specifics
+
+### File Structure
+- Create `.github/workflows/` directory for workflow files
+- Use separate `build.yml` and `test.yml` workflow files
+
+### Environment Setup
+- Configure Python with `actions/setup-python@v4` action
+- Use pip cache for faster dependency installation: `cache: 'pip'`
+- Support multiple Python versions (3.9, 3.10, 3.11, 3.12)
+
+### Change Detection
+- Use `dorny/paths-filter@v2` action for efficient change detection
+- Include Python extensions: `**/*.py`
+- Include dependency files: `requirements*.txt`, `pyproject.toml`, `setup.py`, `Pipfile`
+
+### Python Commands
+- Install: `pip install -r requirements.txt` or `pip install -e .`
+- Build: `python -m build` for packages, or validation commands
+- Format: `black --check .`, `isort --check-only .`
+- Lint: `flake8 .`, `pylint **/*.py`
+- Type check: `mypy .`
+- Test: `pytest`, `python -m pytest --cov=. --cov-report=xml`
+
+### Monorepo Integration
+- For Poetry monorepos: Use workspace dependencies and `poetry run` commands
+- For setuptools monorepos: Use `pip install -e packages/*/` pattern
+- Change detection per package with path filters
