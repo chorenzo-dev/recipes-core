@@ -8,15 +8,15 @@ ecosystems:
     default_variant: prettier
     variants:
       - id: prettier
-        fix_prompt: fixes/javascript_prettier.md
+        fix_prompt: variants/javascript_prettier.md
 
   - id: python
     default_variant: black
     variants:
       - id: black
-        fix_prompt: fixes/python_black.md
+        fix_prompt: variants/python_black.md
       - id: ruff
-        fix_prompt: fixes/python_ruff.md
+        fix_prompt: variants/python_ruff.md
 
 provides:
   - code-formatting.exists

@@ -8,12 +8,12 @@ ecosystems:
     default_variant: prettier-plugin-sort-imports
     variants:
       - id: prettier-plugin-sort-imports
-        fix_prompt: fixes/javascript_prettier-plugin-sort-imports.md
+        fix_prompt: variants/javascript_prettier-plugin-sort-imports.md
   - id: python
     default_variant: isort
     variants:
       - id: isort
-        fix_prompt: fixes/python_isort.md
+        fix_prompt: variants/python_isort.md
 
 provides: []
 
