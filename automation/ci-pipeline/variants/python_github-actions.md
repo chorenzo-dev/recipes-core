@@ -7,7 +7,7 @@
 ### Environment Setup
 - Configure Python with `actions/setup-python@v4` action
 - Use pip cache for faster dependency installation: `cache: 'pip'`
-- Support multiple Python versions (3.9, 3.10, 3.11, 3.12)
+- Detect Python version from `pyproject.toml`, `.python-version`, `runtime.txt`, or use current stable version if not specified
 
 ### Change Detection
 - Use `dorny/paths-filter@v2` action for efficient change detection

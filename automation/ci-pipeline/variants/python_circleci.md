@@ -5,7 +5,8 @@
 - Define workflows with build and test jobs
 
 ### Environment Setup
-- Use Python Docker image: `cimg/python:3.11` or similar
+- Detect Python version from `pyproject.toml`, `.python-version`, `runtime.txt`, or use current stable version if not specified
+- Use Python Docker image: `cimg/python:${detected_version}`
 - Install Python orb for convenience: `circleci/python@2.0.3`
 
 ### Change Detection

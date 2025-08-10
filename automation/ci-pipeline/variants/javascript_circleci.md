@@ -5,7 +5,8 @@
 - Define workflows with build and test jobs
 
 ### Environment Setup
-- Use Node.js Docker image: `cimg/node:20.0` or similar
+- Detect Node.js version from `.nvmrc`, `package.json` engines field, or use current LTS version if not specified
+- Use Node.js Docker image: `cimg/node:${detected_version}`
 - Install Node.js orb for convenience: `circleci/node@5.1.0`
 
 ### Change Detection

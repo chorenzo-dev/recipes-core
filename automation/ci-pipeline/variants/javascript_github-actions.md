@@ -7,7 +7,7 @@
 ### Environment Setup
 - Configure Node.js with `actions/setup-node@v4` action
 - Use npm cache for faster dependency installation: `cache: 'npm'`
-- Consider multiple Node versions (18, 20) for compatibility testing
+- Detect Node.js version from `.nvmrc`, `package.json` engines field, or use current LTS version if not specified
 
 ### Change Detection
 - Use `dorny/paths-filter@v2` action for efficient change detection

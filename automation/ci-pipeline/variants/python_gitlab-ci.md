@@ -5,7 +5,8 @@
 - Define stages: changes, build, test
 
 ### Environment Setup
-- Use Python Docker image: `python:3.11` or `python:3.12`
+- Detect Python version from `pyproject.toml`, `.python-version`, `runtime.txt`, or use current stable version if not specified
+- Use Python Docker image: `python:${detected_version}`
 - Set PYTHON_VERSION variable for consistency
 - Configure pip cache for efficient builds
 

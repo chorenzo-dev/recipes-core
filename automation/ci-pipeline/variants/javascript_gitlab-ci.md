@@ -5,7 +5,8 @@
 - Define stages: changes, build, test
 
 ### Environment Setup
-- Use Node.js Docker image: `node:20` or `node:22`
+- Detect Node.js version from `.nvmrc`, `package.json` engines field, or use current LTS version if not specified
+- Use Node.js Docker image: `node:${detected_version}`
 - Set NODE_VERSION variable for consistency
 - Configure cache with lock file key for efficient builds
 
