@@ -4,10 +4,15 @@
 - Create `.github/workflows/` directory for workflow files
 - Use separate `build.yml` and `test.yml` workflow files
 
+### Trigger Configuration
+- Trigger on push to `main` branch
+- Trigger on pull requests targeting `main` branch
+- Use `on: [push: branches: [main], pull_request: branches: [main]]`
+
 ### Environment Setup
 - Configure Python with `actions/setup-python@v4` action
 - Use pip cache for faster dependency installation: `cache: 'pip'`
-- Support multiple Python versions (3.9, 3.10, 3.11, 3.12)
+- Detect Python version from `pyproject.toml`, `.python-version`, `runtime.txt`, or use current stable version if not specified
 
 ### Change Detection
 - Use `dorny/paths-filter@v2` action for efficient change detection
@@ -20,9 +25,14 @@
 - Format: `black --check .`, `isort --check-only .`
 - Lint: `flake8 .`, `pylint **/*.py`
 - Type check: `mypy .`
-- Test: `pytest`, `python -m pytest --cov=. --cov-report=xml`
+- Test: `pytest --cov=. --cov-report=xml` if coverage available, otherwise `pytest`
 
 ### Monorepo Integration
 - For Poetry monorepos: Use workspace dependencies and `poetry run` commands
 - For setuptools monorepos: Use `pip install -e packages/*/` pattern
 - Change detection per package with path filters
+
+### Analysis Update
+- After creating GitHub Actions workflows, update `.chorenzo/analysis.json`
+- Set the workspace-level `ciCd` field to `"github_actions"`
+- If the file doesn't exist, create it with minimal structure including the `ciCd` field

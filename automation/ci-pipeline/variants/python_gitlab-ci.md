@@ -4,8 +4,14 @@
 - Create `.gitlab-ci.yml` file in repository root
 - Define stages: changes, build, test
 
+### Trigger Configuration
+- Trigger on push to `main` branch
+- Trigger on merge requests targeting `main` branch
+- Use `rules` with `if: $CI_COMMIT_BRANCH == "main" || $CI_MERGE_REQUEST_TARGET_BRANCH_NAME == "main"`
+
 ### Environment Setup
-- Use Python Docker image: `python:3.11` or `python:3.12`
+- Detect Python version from `pyproject.toml`, `.python-version`, `runtime.txt`, or use current stable version if not specified
+- Use Python Docker image: `python:${detected_version}`
 - Set PYTHON_VERSION variable for consistency
 - Configure pip cache for efficient builds
 
@@ -25,9 +31,14 @@
 - Format: `black --check .`, `isort --check-only .`
 - Lint: `flake8 .`, `pylint **/*.py`
 - Type check: `mypy .`
-- Test: `pytest --cov=. --cov-report=xml`
+- Test: `pytest --cov=. --cov-report=xml` if coverage available, otherwise `pytest`
 
 ### Artifacts & Reports
 - Store coverage reports with cobertura format
 - Configure test artifacts for GitLab integration
 - Set reasonable expire times for build artifacts
+
+### Analysis Update
+- After creating `.gitlab-ci.yml`, update `.chorenzo/analysis.json`
+- Set the workspace-level `ciCd` field to `"gitlab_ci"`
+- If the file doesn't exist, create it with minimal structure including the `ciCd` field

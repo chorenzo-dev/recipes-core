@@ -4,8 +4,14 @@
 - Create `.circleci/config.yml` file in repository root
 - Define workflows with build and test jobs
 
+### Trigger Configuration
+- Trigger on push to `main` branch
+- Trigger on pull requests targeting `main` branch
+- Configure workflow `filters` with `branches: only: [main]` for pushes and PRs to main
+
 ### Environment Setup
-- Use Node.js Docker image: `cimg/node:20.0` or similar
+- Detect Node.js version from `.nvmrc`, `package.json` engines field, or use current LTS version if not specified
+- Use Node.js Docker image: `cimg/node:${detected_version}`
 - Install Node.js orb for convenience: `circleci/node@5.1.0`
 
 ### Change Detection
@@ -22,7 +28,7 @@
 ### JavaScript Commands
 - Install: Use Node orb `node/install-packages` or `npm ci`
 - Build: `npm run build`, `npm run typecheck`, `npm run lint`
-- Test: `npm test`, `npm run test:coverage`
+- Test: `npm run test:coverage` if available, otherwise `npm test`
 
 ### Artifacts & Reports
 - Store test results: `store_test_results` with path `./test-results`
@@ -32,3 +38,8 @@
 ### Monorepo Integration
 - For Nx: Use `nx affected:build --base=$CIRCLE_COMPARE_URL`
 - For Turborepo: Use `turbo run build --filter=...[${CIRCLE_COMPARE_URL}]`
+
+### Analysis Update
+- After creating `.circleci/config.yml`, update `.chorenzo/analysis.json`
+- Set the workspace-level `ciCd` field to `"circleci"`
+- If the file doesn't exist, create it with minimal structure including the `ciCd` field

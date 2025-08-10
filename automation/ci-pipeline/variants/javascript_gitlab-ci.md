@@ -4,8 +4,14 @@
 - Create `.gitlab-ci.yml` file in repository root
 - Define stages: changes, build, test
 
+### Trigger Configuration
+- Trigger on push to `main` branch
+- Trigger on merge requests targeting `main` branch
+- Use `rules` with `if: $CI_COMMIT_BRANCH == "main" || $CI_MERGE_REQUEST_TARGET_BRANCH_NAME == "main"`
+
 ### Environment Setup
-- Use Node.js Docker image: `node:20` or `node:22`
+- Detect Node.js version from `.nvmrc`, `package.json` engines field, or use current LTS version if not specified
+- Use Node.js Docker image: `node:${detected_version}`
 - Set NODE_VERSION variable for consistency
 - Configure cache with lock file key for efficient builds
 
@@ -23,7 +29,7 @@
 ### JavaScript Commands
 - Install: `npm ci --cache .npm --prefer-offline`
 - Build: `npm run build`, `npm run typecheck`, `npm run lint`
-- Test: `npm test`, `npm run test:coverage`
+- Test: `npm run test:coverage` if available, otherwise `npm test`
 - Coverage regex: `'/Lines\s*:\s*(\d+\.\d+)%/'`
 
 ### Artifacts & Reports
@@ -34,3 +40,8 @@
 ### Monorepo Integration  
 - For Nx: Use `nx affected:build --base=origin/$CI_MERGE_REQUEST_TARGET_BRANCH_NAME`
 - For Turborepo: Use `turbo run build --filter=...[origin/$CI_MERGE_REQUEST_TARGET_BRANCH_NAME]`
+
+### Analysis Update
+- After creating `.gitlab-ci.yml`, update `.chorenzo/analysis.json`
+- Set the workspace-level `ciCd` field to `"gitlab_ci"`
+- If the file doesn't exist, create it with minimal structure including the `ciCd` field

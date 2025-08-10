@@ -4,8 +4,14 @@
 - Create `.circleci/config.yml` file in repository root
 - Define workflows with build and test jobs
 
+### Trigger Configuration
+- Trigger on push to `main` branch
+- Trigger on pull requests targeting `main` branch
+- Configure workflow `filters` with `branches: only: [main]` for pushes and PRs to main
+
 ### Environment Setup
-- Use Python Docker image: `cimg/python:3.11` or similar
+- Detect Python version from `pyproject.toml`, `.python-version`, `runtime.txt`, or use current stable version if not specified
+- Use Python Docker image: `cimg/python:${detected_version}`
 - Install Python orb for convenience: `circleci/python@2.0.3`
 
 ### Change Detection
@@ -25,9 +31,14 @@
 - Format: `black --check .`, `isort --check-only .`
 - Lint: `flake8 .`, `pylint **/*.py`
 - Type check: `mypy .`
-- Test: `pytest --cov=. --cov-report=xml`
+- Test: `pytest --cov=. --cov-report=xml` if coverage available, otherwise `pytest`
 
 ### Artifacts & Reports
 - Store test results: `store_test_results` 
 - Store coverage artifacts: `store_artifacts` with coverage files
 - Persist build outputs to workspace for deployment
+
+### Analysis Update
+- After creating `.circleci/config.yml`, update `.chorenzo/analysis.json`
+- Set the workspace-level `ciCd` field to `"circleci"`
+- If the file doesn't exist, create it with minimal structure including the `ciCd` field
