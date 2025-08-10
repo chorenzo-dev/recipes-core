@@ -1,0 +1,12 @@
+id: secret-scanner
+category: security
+summary: Add GitHub Actions workflow to scan for exposed API keys, passwords, and secrets in code and config files.
+level: workspace-only
+
+ecosystems: []
+
+provides: []
+
+requires:
+  - key: ci-pipeline.platform
+    equals: github-actions
