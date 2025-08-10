@@ -32,3 +32,8 @@
 ### Monorepo Integration
 - For Nx: Use `nx affected:build --base=$CIRCLE_COMPARE_URL`
 - For Turborepo: Use `turbo run build --filter=...[${CIRCLE_COMPARE_URL}]`
+
+### Analysis Update
+- After creating `.circleci/config.yml`, update `.chorenzo/analysis.json`
+- Set the workspace-level `ciCd` field to `"circleci"`
+- If the file doesn't exist, create it with minimal structure including the `ciCd` field

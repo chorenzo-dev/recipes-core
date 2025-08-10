@@ -24,3 +24,8 @@
 ### Monorepo Integration
 - For Nx projects: Replace npm commands with `nx affected:build`, `nx affected:test`
 - For Turborepo: Use `turbo run build --filter=[HEAD^1]`, `turbo run test --filter=[HEAD^1]`
+
+### Analysis Update
+- After creating GitHub Actions workflows, update `.chorenzo/analysis.json`
+- Set the workspace-level `ciCd` field to `"github_actions"`
+- If the file doesn't exist, create it with minimal structure including the `ciCd` field

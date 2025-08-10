@@ -34,3 +34,8 @@
 ### Monorepo Integration  
 - For Nx: Use `nx affected:build --base=origin/$CI_MERGE_REQUEST_TARGET_BRANCH_NAME`
 - For Turborepo: Use `turbo run build --filter=...[origin/$CI_MERGE_REQUEST_TARGET_BRANCH_NAME]`
+
+### Analysis Update
+- After creating `.gitlab-ci.yml`, update `.chorenzo/analysis.json`
+- Set the workspace-level `ciCd` field to `"gitlab_ci"`
+- If the file doesn't exist, create it with minimal structure including the `ciCd` field

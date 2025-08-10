@@ -31,3 +31,8 @@
 - Store test results: `store_test_results` 
 - Store coverage artifacts: `store_artifacts` with coverage files
 - Persist build outputs to workspace for deployment
+
+### Analysis Update
+- After creating `.circleci/config.yml`, update `.chorenzo/analysis.json`
+- Set the workspace-level `ciCd` field to `"circleci"`
+- If the file doesn't exist, create it with minimal structure including the `ciCd` field

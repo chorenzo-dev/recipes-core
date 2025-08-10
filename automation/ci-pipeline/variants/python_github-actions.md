@@ -26,3 +26,8 @@
 - For Poetry monorepos: Use workspace dependencies and `poetry run` commands
 - For setuptools monorepos: Use `pip install -e packages/*/` pattern
 - Change detection per package with path filters
+
+### Analysis Update
+- After creating GitHub Actions workflows, update `.chorenzo/analysis.json`
+- Set the workspace-level `ciCd` field to `"github_actions"`
+- If the file doesn't exist, create it with minimal structure including the `ciCd` field

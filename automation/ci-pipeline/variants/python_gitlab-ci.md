@@ -31,3 +31,8 @@
 - Store coverage reports with cobertura format
 - Configure test artifacts for GitLab integration
 - Set reasonable expire times for build artifacts
+
+### Analysis Update
+- After creating `.gitlab-ci.yml`, update `.chorenzo/analysis.json`
+- Set the workspace-level `ciCd` field to `"gitlab_ci"`
+- If the file doesn't exist, create it with minimal structure including the `ciCd` field
