@@ -24,11 +24,8 @@ ecosystems:
         fix_prompt: variants/python_circleci.md
 
 provides:
-  - id: ci-pipeline.platform
-    description: The CI/CD platform being configured (github-actions, gitlab-ci, circleci)
-  - id: ci-pipeline.has_build_pipeline
-    description: Whether separate build pipeline was configured
-  - id: ci-pipeline.has_test_pipeline
-    description: Whether separate test pipeline was configured
+  - ci-pipeline.platform
+  - ci-pipeline.has_build_pipeline
+  - ci-pipeline.has_test_pipeline
 
 requires: []
