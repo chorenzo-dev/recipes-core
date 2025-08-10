@@ -31,7 +31,7 @@
 - Format: `black --check .`, `isort --check-only .`
 - Lint: `flake8 .`, `pylint **/*.py`
 - Type check: `mypy .`
-- Test: `pytest --cov=. --cov-report=xml`
+- Test: `pytest --cov=. --cov-report=xml` if coverage available, otherwise `pytest`
 
 ### Artifacts & Reports
 - Store coverage reports with cobertura format

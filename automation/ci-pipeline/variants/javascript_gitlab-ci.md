@@ -29,7 +29,7 @@
 ### JavaScript Commands
 - Install: `npm ci --cache .npm --prefer-offline`
 - Build: `npm run build`, `npm run typecheck`, `npm run lint`
-- Test: `npm test`, `npm run test:coverage`
+- Test: `npm run test:coverage` if available, otherwise `npm test`
 - Coverage regex: `'/Lines\s*:\s*(\d+\.\d+)%/'`
 
 ### Artifacts & Reports

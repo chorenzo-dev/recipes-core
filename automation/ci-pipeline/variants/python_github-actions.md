@@ -25,7 +25,7 @@
 - Format: `black --check .`, `isort --check-only .`
 - Lint: `flake8 .`, `pylint **/*.py`
 - Type check: `mypy .`
-- Test: `pytest`, `python -m pytest --cov=. --cov-report=xml`
+- Test: `pytest --cov=. --cov-report=xml` if coverage available, otherwise `pytest`
 
 ### Monorepo Integration
 - For Poetry monorepos: Use workspace dependencies and `poetry run` commands

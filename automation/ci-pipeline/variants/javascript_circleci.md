@@ -28,7 +28,7 @@
 ### JavaScript Commands
 - Install: Use Node orb `node/install-packages` or `npm ci`
 - Build: `npm run build`, `npm run typecheck`, `npm run lint`
-- Test: `npm test`, `npm run test:coverage`
+- Test: `npm run test:coverage` if available, otherwise `npm test`
 
 ### Artifacts & Reports
 - Store test results: `store_test_results` with path `./test-results`

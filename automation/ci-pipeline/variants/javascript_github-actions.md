@@ -23,7 +23,7 @@
 ### JavaScript Commands
 - Install: `npm ci` (faster than npm install in CI)
 - Build commands: `npm run build`, `npm run typecheck`
-- Test commands: `npm test`, `npm run test:coverage`
+- Test: `npm run test:coverage` if available, otherwise `npm test`
 - Format: `npm run format:check`, `npm run lint`
 
 ### Monorepo Integration
