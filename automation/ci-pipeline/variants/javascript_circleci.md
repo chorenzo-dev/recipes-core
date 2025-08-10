@@ -4,6 +4,11 @@
 - Create `.circleci/config.yml` file in repository root
 - Define workflows with build and test jobs
 
+### Trigger Configuration
+- Trigger on push to `main` branch
+- Trigger on pull requests targeting `main` branch
+- Configure workflow `filters` with `branches: only: [main]` for pushes and PRs to main
+
 ### Environment Setup
 - Detect Node.js version from `.nvmrc`, `package.json` engines field, or use current LTS version if not specified
 - Use Node.js Docker image: `cimg/node:${detected_version}`

@@ -4,6 +4,11 @@
 - Create `.github/workflows/` directory for workflow files
 - Use separate `build.yml` and `test.yml` workflow files
 
+### Trigger Configuration
+- Trigger on push to `main` branch
+- Trigger on pull requests targeting `main` branch
+- Use `on: [push: branches: [main], pull_request: branches: [main]]`
+
 ### Environment Setup
 - Configure Node.js with `actions/setup-node@v4` action
 - Use npm cache for faster dependency installation: `cache: 'npm'`

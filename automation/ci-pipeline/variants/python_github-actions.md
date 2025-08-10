@@ -4,6 +4,11 @@
 - Create `.github/workflows/` directory for workflow files
 - Use separate `build.yml` and `test.yml` workflow files
 
+### Trigger Configuration
+- Trigger on push to `main` branch
+- Trigger on pull requests targeting `main` branch
+- Use `on: [push: branches: [main], pull_request: branches: [main]]`
+
 ### Environment Setup
 - Configure Python with `actions/setup-python@v4` action
 - Use pip cache for faster dependency installation: `cache: 'pip'`

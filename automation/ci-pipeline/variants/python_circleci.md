@@ -4,6 +4,11 @@
 - Create `.circleci/config.yml` file in repository root
 - Define workflows with build and test jobs
 
+### Trigger Configuration
+- Trigger on push to `main` branch
+- Trigger on pull requests targeting `main` branch
+- Configure workflow `filters` with `branches: only: [main]` for pushes and PRs to main
+
 ### Environment Setup
 - Detect Python version from `pyproject.toml`, `.python-version`, `runtime.txt`, or use current stable version if not specified
 - Use Python Docker image: `cimg/python:${detected_version}`

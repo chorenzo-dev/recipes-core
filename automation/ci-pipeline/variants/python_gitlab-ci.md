@@ -4,6 +4,11 @@
 - Create `.gitlab-ci.yml` file in repository root
 - Define stages: changes, build, test
 
+### Trigger Configuration
+- Trigger on push to `main` branch
+- Trigger on merge requests targeting `main` branch
+- Use `rules` with `if: $CI_COMMIT_BRANCH == "main" || $CI_MERGE_REQUEST_TARGET_BRANCH_NAME == "main"`
+
 ### Environment Setup
 - Detect Python version from `pyproject.toml`, `.python-version`, `runtime.txt`, or use current stable version if not specified
 - Use Python Docker image: `python:${detected_version}`

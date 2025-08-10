@@ -4,6 +4,11 @@
 - Create `.gitlab-ci.yml` file in repository root
 - Define stages: changes, build, test
 
+### Trigger Configuration
+- Trigger on push to `main` branch
+- Trigger on merge requests targeting `main` branch
+- Use `rules` with `if: $CI_COMMIT_BRANCH == "main" || $CI_MERGE_REQUEST_TARGET_BRANCH_NAME == "main"`
+
 ### Environment Setup
 - Detect Node.js version from `.nvmrc`, `package.json` engines field, or use current LTS version if not specified
 - Use Node.js Docker image: `node:${detected_version}`
