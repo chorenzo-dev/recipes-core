@@ -19,7 +19,6 @@ ecosystems:
         fix_prompt: variants/python_ruff.md
 
 provides:
-  - code-formatting.exists
   - code-formatting.variant
 
 requires: []

@@ -14,7 +14,6 @@ Ensure consistent code linting across the codebase with an automated linter to c
    - Identify which languages have linters configured
 
 ## Expected Output
-- code-linting.exists: Whether any code linter is configured for the project
 - code-linting.variant: The specific linter tool detected (if any)
 
 ## Important: Configuration Standards

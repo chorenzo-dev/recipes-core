@@ -19,7 +19,6 @@ ecosystems:
         fix_prompt: variants/python_pylint.md
 
 provides:
-  - code-linting.exists
   - code-linting.variant
 
 requires: []

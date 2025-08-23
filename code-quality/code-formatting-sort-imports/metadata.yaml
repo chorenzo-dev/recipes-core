@@ -18,5 +18,5 @@ ecosystems:
 provides: []
 
 requires:
-  - key: code-formatting.exists
+  - key: code-formatting.applied
     equals: true
