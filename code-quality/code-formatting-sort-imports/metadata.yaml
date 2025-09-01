@@ -5,10 +5,10 @@ level: workspace-preferred
 
 ecosystems:
   - id: javascript
-    default_variant: prettier-plugin-sort-imports
+    default_variant: prettier_plugin_sort_imports
     variants:
-      - id: prettier-plugin-sort-imports
-        fix_prompt: variants/javascript_prettier-plugin-sort-imports.md
+      - id: prettier_plugin_sort_imports
+        fix_prompt: variants/javascript_prettier_plugin_sort_imports.md
   - id: python
     default_variant: isort
     variants:

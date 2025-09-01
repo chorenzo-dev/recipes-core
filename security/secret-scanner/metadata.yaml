@@ -9,4 +9,4 @@ provides: []
 
 requires:
   - key: ci-pipeline.platform
-    equals: github-actions
+    equals: github_actions
