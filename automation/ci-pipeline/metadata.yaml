@@ -5,21 +5,21 @@ level: workspace-only
 
 ecosystems:
   - id: javascript
-    default_variant: github-actions
+    default_variant: github_actions
     variants:
-      - id: github-actions
-        fix_prompt: variants/javascript_github-actions.md
-      - id: gitlab-ci
-        fix_prompt: variants/javascript_gitlab-ci.md
+      - id: github_actions
+        fix_prompt: variants/javascript_github_actions.md
+      - id: gitlab_ci
+        fix_prompt: variants/javascript_gitlab_ci.md
       - id: circleci
         fix_prompt: variants/javascript_circleci.md
   - id: python
-    default_variant: github-actions
+    default_variant: github_actions
     variants:
-      - id: github-actions
-        fix_prompt: variants/python_github-actions.md
-      - id: gitlab-ci
-        fix_prompt: variants/python_gitlab-ci.md
+      - id: github_actions
+        fix_prompt: variants/python_github_actions.md
+      - id: gitlab_ci
+        fix_prompt: variants/python_gitlab_ci.md
       - id: circleci
         fix_prompt: variants/python_circleci.md
 

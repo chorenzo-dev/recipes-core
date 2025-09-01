@@ -11,9 +11,9 @@ ecosystems:
         fix_prompt: variants/javascript_husky.md
 
   - id: python
-    default_variant: pre-commit
+    default_variant: pre_commit
     variants:
-      - id: pre-commit
+      - id: pre_commit
         fix_prompt: variants/python_pre_commit.md
 
 provides:

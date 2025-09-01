@@ -1,41 +1,84 @@
-# CI/CD Pipeline Configuration
+# CI/CD Pipeline Implementation
 
-## Overview
+## Directory Structure
 
-Set up continuous integration and continuous deployment pipelines to automate code quality checks, testing, and deployment processes. This recipe focuses on creating separate build and test pipelines optimized for both single projects and monorepos.
+Create the CI/CD configuration directory based on your platform:
+- GitHub Actions: `.github/workflows/`
+- GitLab CI: Root directory (`.gitlab-ci.yml`)
+- CircleCI: `.circleci/`
 
-## Requirements
+## Basic Pipeline Configuration
 
-### Build Pipeline
-- Install dependencies and set up project environment
-- Run code formatting checks to ensure consistent style
-- Execute linting to catch code quality issues
-- Perform type checking for statically typed languages
-- Build/compile the project to verify it can be packaged
+### 1. Create Build Pipeline File
 
-### Test Pipeline
-- Install dependencies (may run in parallel with build)
-- Execute unit tests and integration tests
-- Generate code coverage reports
-- Store test results and artifacts for review
+Name your build pipeline file:
+- `build.yml` or `build.yaml` for GitHub Actions
+- Include `build:` stage in `.gitlab-ci.yml` for GitLab
+- Include `build` job in `config.yml` for CircleCI
 
-### Change Detection
-- Configure pipeline to detect relevant file changes
-- Skip unnecessary builds when no source code changes occur
-- Optimize for monorepo scenarios by running tasks only for affected packages
-- Include configuration files, dependencies, and lock files in change detection
+### 2. Define Build Steps
 
-### Platform Integration
-- Choose appropriate CI/CD platform based on repository hosting
-- Configure triggers for pushes, pull requests, and merge events
-- Set up proper permissions and secrets management
-- Configure artifact storage and deployment targets
-- Update project analysis to reflect configured CI/CD system
+Configure these universal build steps:
+```
+1. Checkout code
+2. Set up runtime environment (Node.js, Python, etc.)
+3. Install dependencies
+4. Run formatting check
+5. Run linting
+6. Run type checking (if applicable)  
+7. Build/compile project
+```
 
-## Monorepo Considerations
+### 3. Create Test Pipeline File
 
-For projects using monorepo management tools:
-- Integrate with framework-specific commands for efficiency
-- Use affected project detection to minimize unnecessary work
-- Configure smart caching strategies to speed up repeated builds
-- Set up proper workspace dependency management
+Name your test pipeline file:
+- `test.yml` or `test.yaml` for GitHub Actions
+- Include `test:` stage in `.gitlab-ci.yml` for GitLab
+- Include `test` job in `config.yml` for CircleCI
+
+### 4. Define Test Steps
+
+Configure these universal test steps:
+```
+1. Checkout code
+2. Set up runtime environment
+3. Install dependencies
+4. Run unit tests
+5. Run integration tests (if applicable)
+6. Generate coverage report
+7. Upload test artifacts
+```
+
+### 5. Configure Triggers
+
+Set up pipeline triggers for:
+- Push to main/master branch
+- Pull request events
+- Tag pushes (for releases)
+- Manual triggers (workflow_dispatch or manual jobs)
+
+### 6. Set Up Caching
+
+Configure dependency caching:
+- Cache package manager directories (node_modules, .pip, etc.)
+- Use lock file checksums as cache keys
+- Set appropriate cache expiration policies
+
+### 7. Configure Change Detection
+
+For monorepos, implement change detection:
+- Define path filters for each package/module
+- Use platform-specific change detection features
+- Skip jobs when no relevant files changed
+
+### 8. Update Project Analysis
+
+After pipeline creation, update `analysis.json`:
+```json
+{
+  "ci_cd": {
+    "platform": "[github-actions|gitlab-ci|circleci]",
+    "has_build_pipeline": true,
+    "has_test_pipeline": true
+  }
+}
