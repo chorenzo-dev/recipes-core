@@ -1,36 +1,32 @@
 ## JavaScript + GitHub Actions Specifics
 
-### File Structure
-- Create `.github/workflows/` directory for workflow files
-- Use separate `build.yml` and `test.yml` workflow files
+### Node.js Environment
+Use `actions/setup-node@v4` with Node version detection from `.nvmrc` or `package.json` engines field. Enable npm caching with `cache: 'npm'`.
 
-### Trigger Configuration
-- Trigger on push to `main` branch
-- Trigger on pull requests targeting `main` branch
-- Use `on: [push: branches: [main], pull_request: branches: [main]]`
+### GitHub Actions Syntax
+```yaml
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+```
 
-### Environment Setup
-- Configure Node.js with `actions/setup-node@v4` action
-- Use npm cache for faster dependency installation: `cache: 'npm'`
-- Detect Node.js version from `.nvmrc`, `package.json` engines field, or use current LTS version if not specified
+### Change Detection Filter
+Use `dorny/paths-filter@v2` action with paths:
+- Source files: `**/*.js`, `**/*.ts`, `**/*.jsx`, `**/*.tsx`
+- Package files: `package.json`, `packages/*/package.json`, `package-lock.json`
+- Test files: `**/*.test.*`, `**/*.spec.*`
 
-### Change Detection
-- Use `dorny/paths-filter@v2` action for efficient change detection
-- Include JavaScript/TypeScript extensions: `**/*.js`, `**/*.ts`, `**/*.jsx`, `**/*.tsx`
-- Include package files: `package.json`, `packages/*/package.json`
-- For tests, also include: `**/*.test.*`, `**/*.spec.*`
+### JavaScript-Specific Commands
+- Dependency installation: `npm ci`
+- Build verification: `npm run build`
+- Type checking: `npm run typecheck`
+- Test with coverage: `npm run test:coverage` or `npm test`
+- Formatting check: `npm run format:check`
+- Linting: `npm run lint`
 
-### JavaScript Commands
-- Install: `npm ci` (faster than npm install in CI)
-- Build commands: `npm run build`, `npm run typecheck`
-- Test: `npm run test:coverage` if available, otherwise `npm test`
-- Format: `npm run format:check`, `npm run lint`
-
-### Monorepo Integration
-- For Nx projects: Replace npm commands with `nx affected:build`, `nx affected:test`
-- For Turborepo: Use `turbo run build --filter=[HEAD^1]`, `turbo run test --filter=[HEAD^1]`
-
-### Analysis Update
-- After creating GitHub Actions workflows, update `.chorenzo/analysis.json`
-- Set the workspace-level `ciCd` field to `"github_actions"`
-- If the file doesn't exist, create it with minimal structure including the `ciCd` field
+### Monorepo Optimizations
+- Nx: Use `nx affected:build --base=origin/main` and `nx affected:test --base=origin/main`
+- Turborepo: Use `turbo run build --filter=[HEAD^1]` and `turbo run test --filter=[HEAD^1]`
+- Lerna: Use `lerna run build --since HEAD^1` and `lerna run test --since HEAD^1`

@@ -1,47 +1,34 @@
 ## JavaScript + GitLab CI Specifics
 
-### File Structure
-- Create `.gitlab-ci.yml` file in repository root
-- Define stages: changes, build, test
+### GitLab CI Configuration
+Define stages in `.gitlab-ci.yml`: `changes`, `build`, `test`. Use Node.js Docker image `node:${version}` based on `.nvmrc` or package.json engines.
 
-### Trigger Configuration
-- Trigger on push to `main` branch
-- Trigger on merge requests targeting `main` branch
-- Use `rules` with `if: $CI_COMMIT_BRANCH == "main" || $CI_MERGE_REQUEST_TARGET_BRANCH_NAME == "main"`
+### Rules Syntax
+```yaml
+rules:
+  - if: $CI_COMMIT_BRANCH == "main"
+  - if: $CI_MERGE_REQUEST_TARGET_BRANCH_NAME == "main"
+```
 
-### Environment Setup
-- Detect Node.js version from `.nvmrc`, `package.json` engines field, or use current LTS version if not specified
-- Use Node.js Docker image: `node:${detected_version}`
-- Set NODE_VERSION variable for consistency
-- Configure cache with lock file key for efficient builds
+### Change Detection with GitLab
+Export change detection results as dotenv artifacts:
+```yaml
+artifacts:
+  reports:
+    dotenv: changes.env
+```
 
-### Change Detection Setup
-- Create separate job to check for JavaScript/TypeScript changes
-- Use git diff with GitLab CI variables for change detection
-- Export results as dotenv artifacts for downstream jobs
-- Include extensions: `.js`, `.ts`, `.jsx`, `.tsx`, `package.json`, lock files
+### GitLab-Specific Optimizations
+- Cache configuration: `cache: key: $CI_COMMIT_REF_SLUG-$CI_PROJECT_DIR paths: [node_modules/, .npm/]`
+- Parallel jobs: Use `needs: []` for independent jobs
+- Conditional execution: `rules: - if: $JS_CHANGED == "true"`
 
-### Job Configuration
-- Use `rules` with change detection variables to skip unnecessary jobs
-- Configure `needs` dependencies between jobs for parallel execution
-- Set appropriate cache paths: `node_modules/`, `.npm/`
+### GitLab Commands
+- Optimized install: `npm ci --cache .npm --prefer-offline`
+- Coverage regex: `/Lines\s*:\s*(\d+\.\d+)%/`
+- Artifacts: Configure `expire_in: 1 week` for build outputs
 
-### JavaScript Commands
-- Install: `npm ci --cache .npm --prefer-offline`
-- Build: `npm run build`, `npm run typecheck`, `npm run lint`
-- Test: `npm run test:coverage` if available, otherwise `npm test`
-- Coverage regex: `'/Lines\s*:\s*(\d+\.\d+)%/'`
-
-### Artifacts & Reports
-- Store build outputs: `dist/`, `build/`
-- Configure coverage reports with cobertura format
-- Set reasonable expire times for artifacts
-
-### Monorepo Integration  
-- For Nx: Use `nx affected:build --base=origin/$CI_MERGE_REQUEST_TARGET_BRANCH_NAME`
-- For Turborepo: Use `turbo run build --filter=...[origin/$CI_MERGE_REQUEST_TARGET_BRANCH_NAME]`
-
-### Analysis Update
-- After creating `.gitlab-ci.yml`, update `.chorenzo/analysis.json`
-- Set the workspace-level `ciCd` field to `"gitlab_ci"`
-- If the file doesn't exist, create it with minimal structure including the `ciCd` field
+### Monorepo with GitLab CI
+- Nx: `nx affected:build --base=origin/$CI_MERGE_REQUEST_TARGET_BRANCH_NAME`
+- Turborepo: `turbo run build --filter=...[origin/$CI_MERGE_REQUEST_TARGET_BRANCH_NAME]`
+- Use `$CI_MERGE_REQUEST_DIFF_BASE_SHA` for accurate base comparison

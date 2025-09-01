@@ -1,38 +1,23 @@
 ## Python + GitHub Actions Specifics
 
-### File Structure
-- Create `.github/workflows/` directory for workflow files
-- Use separate `build.yml` and `test.yml` workflow files
+### Python Environment
+Use `actions/setup-python@v4` with version detection from `pyproject.toml`, `.python-version`, or `runtime.txt`. Enable pip caching with `cache: 'pip'`.
 
-### Trigger Configuration
-- Trigger on push to `main` branch
-- Trigger on pull requests targeting `main` branch
-- Use `on: [push: branches: [main], pull_request: branches: [main]]`
+### Change Detection for Python
+Use `dorny/paths-filter@v2` with paths:
+- Source files: `**/*.py`
+- Dependency files: `requirements*.txt`, `pyproject.toml`, `setup.py`, `Pipfile`, `poetry.lock`
+- Test files: `tests/**`, `**/test_*.py`, `**/*_test.py`
 
-### Environment Setup
-- Configure Python with `actions/setup-python@v4` action
-- Use pip cache for faster dependency installation: `cache: 'pip'`
-- Detect Python version from `pyproject.toml`, `.python-version`, `runtime.txt`, or use current stable version if not specified
+### Python-Specific Commands
+- Dependency installation: `pip install -r requirements.txt` or `pip install -e .`
+- Package building: `python -m build`
+- Formatting check: `black --check .` and `isort --check-only .`
+- Linting: `flake8 .` or `pylint **/*.py` or `ruff check`
+- Type checking: `mypy .`
+- Test with coverage: `pytest --cov=. --cov-report=xml`
 
-### Change Detection
-- Use `dorny/paths-filter@v2` action for efficient change detection
-- Include Python extensions: `**/*.py`
-- Include dependency files: `requirements*.txt`, `pyproject.toml`, `setup.py`, `Pipfile`
-
-### Python Commands
-- Install: `pip install -r requirements.txt` or `pip install -e .`
-- Build: `python -m build` for packages, or validation commands
-- Format: `black --check .`, `isort --check-only .`
-- Lint: `flake8 .`, `pylint **/*.py`
-- Type check: `mypy .`
-- Test: `pytest --cov=. --cov-report=xml` if coverage available, otherwise `pytest`
-
-### Monorepo Integration
-- For Poetry monorepos: Use workspace dependencies and `poetry run` commands
-- For setuptools monorepos: Use `pip install -e packages/*/` pattern
-- Change detection per package with path filters
-
-### Analysis Update
-- After creating GitHub Actions workflows, update `.chorenzo/analysis.json`
-- Set the workspace-level `ciCd` field to `"github_actions"`
-- If the file doesn't exist, create it with minimal structure including the `ciCd` field
+### Python Monorepo Support
+- Poetry workspaces: `poetry install` and `poetry run pytest`
+- Multiple packages: `pip install -e packages/*/`
+- Per-package testing: Use matrix strategy with package directories

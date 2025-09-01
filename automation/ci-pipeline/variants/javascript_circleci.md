@@ -1,45 +1,29 @@
 ## JavaScript + CircleCI Specifics
 
-### File Structure
-- Create `.circleci/config.yml` file in repository root
-- Define workflows with build and test jobs
+### CircleCI Configuration
+Use `.circleci/config.yml` with Node.js orb `circleci/node@5.1.0`. Configure Docker image `cimg/node:${version}` based on `.nvmrc` or package.json engines.
 
-### Trigger Configuration
-- Trigger on push to `main` branch
-- Trigger on pull requests targeting `main` branch
-- Configure workflow `filters` with `branches: only: [main]` for pushes and PRs to main
-
-### Environment Setup
-- Detect Node.js version from `.nvmrc`, `package.json` engines field, or use current LTS version if not specified
-- Use Node.js Docker image: `cimg/node:${detected_version}`
-- Install Node.js orb for convenience: `circleci/node@5.1.0`
+### Workflow Filters
+```yaml
+filters:
+  branches:
+    only: [main]
+```
 
 ### Change Detection
-- Use `CIRCLE_COMPARE_URL` for commit range detection
-- Parse commit range and run git diff for file changes
-- Use workspace persistence to share change detection results
-- Include JavaScript/TypeScript extensions and package files
+Utilize `CIRCLE_COMPARE_URL` environment variable for commit range detection. Share results between jobs using workspace persistence.
 
-### Job Configuration
-- Use `circleci step halt` to skip jobs when no changes detected
-- Configure workspace attachment for sharing data between jobs
-- Set up proper job dependencies with `requires`
+### Job Optimization
+- Skip unchanged jobs: `circleci step halt`
+- Share artifacts: `persist_to_workspace` and `attach_workspace`
+- Chain jobs: Use `requires` in workflow definition
 
-### JavaScript Commands
-- Install: Use Node orb `node/install-packages` or `npm ci`
-- Build: `npm run build`, `npm run typecheck`, `npm run lint`
-- Test: `npm run test:coverage` if available, otherwise `npm test`
+### CircleCI-Specific Commands
+- Dependency installation: `node/install-packages` (orb) or `npm ci`
+- Test results: `store_test_results` with path `./test-results`
+- Coverage artifacts: `store_artifacts` with path `./coverage`
 
-### Artifacts & Reports
-- Store test results: `store_test_results` with path `./test-results`
-- Store coverage artifacts: `store_artifacts` with path `./coverage`
-- Persist build outputs to workspace for downstream jobs
-
-### Monorepo Integration
-- For Nx: Use `nx affected:build --base=$CIRCLE_COMPARE_URL`
-- For Turborepo: Use `turbo run build --filter=...[${CIRCLE_COMPARE_URL}]`
-
-### Analysis Update
-- After creating `.circleci/config.yml`, update `.chorenzo/analysis.json`
-- Set the workspace-level `ciCd` field to `"circleci"`
-- If the file doesn't exist, create it with minimal structure including the `ciCd` field
+### Monorepo with CircleCI
+- Nx: `nx affected:build --base=$CIRCLE_COMPARE_URL`
+- Turborepo: `turbo run build --filter=...[${CIRCLE_COMPARE_URL}]`
+- Lerna: Parse `CIRCLE_COMPARE_URL` and use `--since` flag

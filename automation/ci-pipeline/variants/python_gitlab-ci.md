@@ -1,44 +1,33 @@
 ## Python + GitLab CI Specifics
 
-### File Structure
-- Create `.gitlab-ci.yml` file in repository root
-- Define stages: changes, build, test
+### GitLab CI Python Configuration
+Use Python Docker image `python:${version}` based on `pyproject.toml`, `.python-version`, or `runtime.txt`. Define stages: `changes`, `build`, `test`.
 
-### Trigger Configuration
-- Trigger on push to `main` branch
-- Trigger on merge requests targeting `main` branch
-- Use `rules` with `if: $CI_COMMIT_BRANCH == "main" || $CI_MERGE_REQUEST_TARGET_BRANCH_NAME == "main"`
+### Python Cache Configuration
+```yaml
+cache:
+  key: $CI_COMMIT_REF_SLUG
+  paths:
+    - .cache/pip
+    - venv/
+```
 
-### Environment Setup
-- Detect Python version from `pyproject.toml`, `.python-version`, `runtime.txt`, or use current stable version if not specified
-- Use Python Docker image: `python:${detected_version}`
-- Set PYTHON_VERSION variable for consistency
-- Configure pip cache for efficient builds
+### Python Change Detection
+Detect Python changes using GitLab CI variables:
+- Source: `**/*.py`
+- Dependencies: `requirements*.txt`, `pyproject.toml`, `setup.py`, `Pipfile`
+- Tests: `tests/**`, `**/test_*.py`
 
-### Change Detection Setup
-- Create separate job to check for Python changes
-- Use git diff with GitLab CI variables for change detection
-- Include extensions: `.py`, dependency files like `requirements*.txt`, `pyproject.toml`
+### GitLab Python Commands
+- Virtual environment: `python -m venv venv && source venv/bin/activate`
+- Dependency installation: `pip install -r requirements.txt`
+- Package building: `python -m build`
+- Formatting: `black --check .` and `isort --check-only .`
+- Linting: `flake8 .` or `ruff check`
+- Type checking: `mypy .`
+- Testing: `pytest --cov=. --cov-report=xml --junitxml=report.xml`
 
-### Job Configuration
-- Use `rules` with change detection variables to skip unnecessary jobs
-- Configure cache for pip and virtual environments
-- Set up proper job dependencies with `needs`
-
-### Python Commands
-- Install: `pip install -r requirements.txt` or `pip install -e .`
-- Build: `python -m build`, `python setup.py build`
-- Format: `black --check .`, `isort --check-only .`
-- Lint: `flake8 .`, `pylint **/*.py`
-- Type check: `mypy .`
-- Test: `pytest --cov=. --cov-report=xml` if coverage available, otherwise `pytest`
-
-### Artifacts & Reports
-- Store coverage reports with cobertura format
-- Configure test artifacts for GitLab integration
-- Set reasonable expire times for build artifacts
-
-### Analysis Update
-- After creating `.gitlab-ci.yml`, update `.chorenzo/analysis.json`
-- Set the workspace-level `ciCd` field to `"gitlab_ci"`
-- If the file doesn't exist, create it with minimal structure including the `ciCd` field
+### Python Coverage Integration
+- Configure coverage regex: `/TOTAL.+?(\d+%)$/`
+- Use cobertura format for GitLab coverage visualization
+- Store test reports as JUnit XML
