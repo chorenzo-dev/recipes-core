@@ -29,5 +29,3 @@ Configure workspace-level CI/CD pipelines with separate build and test workflows
 ## Expected Output
 
 - ci-pipeline.platform: The CI/CD platform being configured (github-actions, gitlab-ci, circleci)
-- ci-pipeline.has_build_pipeline: Whether separate build pipeline was configured
-- ci-pipeline.has_test_pipeline: Whether separate test pipeline was configured

@@ -25,7 +25,5 @@ ecosystems:
 
 provides:
   - ci-pipeline.platform
-  - ci-pipeline.has_build_pipeline
-  - ci-pipeline.has_test_pipeline
 
 requires: []

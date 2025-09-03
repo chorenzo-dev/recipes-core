@@ -19,7 +19,6 @@ Name your build pipeline file:
 ### 2. Define Build Steps
 
 Configure these universal build steps:
-```
 1. Checkout code
 2. Set up runtime environment (Node.js, Python, etc.)
 3. Install dependencies
@@ -27,7 +26,6 @@ Configure these universal build steps:
 5. Run linting
 6. Run type checking (if applicable)  
 7. Build/compile project
-```
 
 ### 3. Create Test Pipeline File
 
@@ -39,7 +37,6 @@ Name your test pipeline file:
 ### 4. Define Test Steps
 
 Configure these universal test steps:
-```
 1. Checkout code
 2. Set up runtime environment
 3. Install dependencies
@@ -47,7 +44,6 @@ Configure these universal test steps:
 5. Run integration tests (if applicable)
 6. Generate coverage report
 7. Upload test artifacts
-```
 
 ### 5. Configure Triggers
 
@@ -73,12 +69,4 @@ For monorepos, implement change detection:
 
 ### 8. Update Project Analysis
 
-After pipeline creation, update `analysis.json`:
-```json
-{
-  "ci_cd": {
-    "platform": "[github-actions|gitlab-ci|circleci]",
-    "has_build_pipeline": true,
-    "has_test_pipeline": true
-  }
-}
+After pipeline creation, update `analysis.json` with a ci_cd object containing the platform field set to the appropriate value (github-actions, gitlab-ci, or circleci).

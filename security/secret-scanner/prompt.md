@@ -19,4 +19,4 @@ Add a GitHub Actions workflow to automatically scan for exposed API keys, passwo
 
 ## Expected Output
 
-Provides `secret-scanner.configured` to indicate secret scanning is active in CI/CD pipeline.
+This recipe relies on the automatic `secret-scanner.applied` field to indicate successful configuration.
