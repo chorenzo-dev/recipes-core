@@ -14,13 +14,6 @@ Ensure consistent code linting across the codebase with an automated linter to c
    - Identify which languages have linters configured
 
 ## Expected Output
-- code-linting.variant: The specific linter tool detected (if any)
 
-## Important: Configuration Standards
-When setting up or configuring linters:
-- ALWAYS use ONLY the recommended/standard rule sets (e.g., eslint:recommended, @typescript-eslint/recommended)
-- NEVER add custom rules beyond the recommended configuration
-- NEVER disable or weaken linting rules to make existing code pass
-- NEVER add file-specific rule overrides (e.g., turning off rules for test files)
-- Use the exact configuration shown in the fix templates without modifications
+This recipe relies on the automatic `code-linting.applied` field to indicate successful configuration.
 

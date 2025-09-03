@@ -18,7 +18,6 @@ ecosystems:
       - id: pylint
         fix_prompt: variants/python_pylint.md
 
-provides:
-  - code-linting.variant
+provides: []
 
 requires: []

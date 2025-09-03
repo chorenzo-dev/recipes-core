@@ -10,12 +10,14 @@ If not found, install the linter as a development dependency using the project's
 
 Create a configuration file in the project root using the appropriate format for your linter.
 
-**Configuration guidelines:**
-- **Extend recommended configurations**: Always use the tool's recommended rule sets as the base
+**Configuration standards:**
+- **ALWAYS use ONLY the recommended/standard rule sets** (e.g., eslint:recommended, @typescript-eslint/recommended)
+- **NEVER add custom rules** beyond the recommended configuration
+- **NEVER disable or weaken linting rules** to make existing code pass
+- **NEVER add file-specific rule overrides** (e.g., turning off rules for test files)
+- **Use the exact configuration** shown in the fix templates without modifications
 - **Respect existing ignore patterns**: Linters should respect .gitignore by default
 - **File targeting**: Apply rules to appropriate file extensions and directories
-- **Minimal custom rules**: Only add exclusions for files not already in .gitignore
-- **Language options**: Set appropriate language version and source type settings
 
 ## Scripts
 
