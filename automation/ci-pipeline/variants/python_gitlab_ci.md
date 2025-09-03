@@ -4,13 +4,7 @@
 Use Python Docker image `python:${version}` based on `pyproject.toml`, `.python-version`, or `runtime.txt`. Define stages: `changes`, `build`, `test`.
 
 ### Python Cache Configuration
-```yaml
-cache:
-  key: $CI_COMMIT_REF_SLUG
-  paths:
-    - .cache/pip
-    - venv/
-```
+Configure cache with commit reference slug key and paths for pip cache and virtual environment directories.
 
 ### Python Change Detection
 Detect Python changes using GitLab CI variables:

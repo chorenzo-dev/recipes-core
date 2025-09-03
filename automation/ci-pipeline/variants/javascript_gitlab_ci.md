@@ -4,19 +4,10 @@
 Define stages in `.gitlab-ci.yml`: `changes`, `build`, `test`. Use Node.js Docker image `node:${version}` based on `.nvmrc` or package.json engines.
 
 ### Rules Syntax
-```yaml
-rules:
-  - if: $CI_COMMIT_BRANCH == "main"
-  - if: $CI_MERGE_REQUEST_TARGET_BRANCH_NAME == "main"
-```
+Configure rules with conditions for main branch commits and merge requests targeting main branch using GitLab CI variables.
 
 ### Change Detection with GitLab
-Export change detection results as dotenv artifacts:
-```yaml
-artifacts:
-  reports:
-    dotenv: changes.env
-```
+Export change detection results as dotenv artifacts using the artifacts reports dotenv configuration.
 
 ### GitLab-Specific Optimizations
 - Cache configuration: `cache: key: $CI_COMMIT_REF_SLUG-$CI_PROJECT_DIR paths: [node_modules/, .npm/]`

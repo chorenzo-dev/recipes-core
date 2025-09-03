@@ -4,11 +4,7 @@
 Use `.circleci/config.yml` with Node.js orb `circleci/node@5.1.0`. Configure Docker image `cimg/node:${version}` based on `.nvmrc` or package.json engines.
 
 ### Workflow Filters
-```yaml
-filters:
-  branches:
-    only: [main]
-```
+Configure filters with branches only array set to main branch.
 
 ### Change Detection
 Utilize `CIRCLE_COMPARE_URL` environment variable for commit range detection. Share results between jobs using workspace persistence.

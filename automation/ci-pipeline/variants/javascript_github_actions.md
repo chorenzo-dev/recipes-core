@@ -4,13 +4,7 @@
 Use `actions/setup-node@v4` with Node version detection from `.nvmrc` or `package.json` engines field. Enable npm caching with `cache: 'npm'`.
 
 ### GitHub Actions Syntax
-```yaml
-on:
-  push:
-    branches: [main]
-  pull_request:
-    branches: [main]
-```
+Configure triggers with `on` field for push to main branch and pull requests to main branch using the branches array syntax.
 
 ### Change Detection Filter
 Use `dorny/paths-filter@v2` action with paths:
